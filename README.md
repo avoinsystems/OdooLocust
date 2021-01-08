@@ -8,14 +8,26 @@ An Odoo load testing solution, using odoolib and Locust
 * Locust: <a href="http://locust.io">locust.io</a>
 * Odoo: <a href="https://odoo.com">odoo.com</a>
 
+# Fork Changes
+
+With the forked repository, the naming standards have been slightly altered. TaskSets are now called OdooUsers to better describe what they are.
+
 # HowTo
 
-To load test Odoo, you create tasks sets like you'll have done it with Locust:
+To load test Odoo, you can create multiple tasks by extending the OdooUser class. Note that you will need to specify the `wait_time` property in order to more accurately simulate "real" users, which have small pauses between actions:
 
 ```
-from locust import task, TaskSet
+from locust import task, between
+from OdooUser import OdooUser
 
-class SellerTaskSet(TaskSet):
+
+class MyOdooUser(OdooUser):
+    wait_time = between(15, 50)
+
+    def on_start(self):
+        self.menu = self._load_menu()
+        self.randomlyChooseMenu()
+
     @task(10)
     def read_partners(self):
         cust_model = self.client.get_model('res.partner')
@@ -49,49 +61,31 @@ class SellerTaskSet(TaskSet):
         so_model.action_button_confirm([order_id,])
 ```
 
-then you create a profile, based on your taskset, which use OdooLocust instead of Locust:
+and run your locust tests the usual way:
 
 ```
-from OdooLocust import OdooLocust
-from SellerTaskSet import SellerTaskSet
-
-class Seller(OdooLocust.OdooLocust):
-    host = "127.0.0.1"
-    database = "test_db"
-    min_wait = 100
-    max_wait = 1000
-    weight = 3
-    
-    task_set = SellerTaskSet
-```
-
-and you finally run your locust tests the usual way:
-
-```
-locust -f my_file.py Seller
+locust -f my_file.py MyOdooUser
 ```
 # Generic test
 
-This version is shipped with a generic TaskSet task, OdooTaskSet, and a TaskSet which randomly click on menu items, 
-OdooGenericTaskSet.  To use this version, create this simple test file:
+This version is shipped with a configurable OdooUser that can be configured from local variables, and a generic odoo user which randomly clicks on menu items, 
+OdooGenericUser.  To use the OdooGenericUser version, when running locust, simply specify the file
+
 
 ```
-from OdooLocust import OdooLocust
-from OdooLocust import OdooTaskSet
-
-
-class Generic(OdooLocust.OdooLocust):
-    host = "127.0.0.1"
-    database = "testdb"
-    min_wait = 100
-    max_wait = 1000
-    weight = 3
-    
-    task_set = OdooTaskSet.OdooGenericTaskSet
+locust -f OdooGenericUser.py OdooGenericUser
 ```
 
-and you finally run your locust tests the usual way:
+# Environment variables
 
-```
-locust -f my_file.py Generic
-```
+The following is a list of environment variables that, when set, will be used to configure Locust for Odoo
+
+| Variable | Purpose | Default value |
+|-|-|-|
+| OL_HOST | The host IP of Odoo | "127.0.0.1" |
+| OL_PORT | The port on which to expose Locust | 8069 |
+| OL_DATABASE | Name of the Odoo database | "demo" |
+| OL_LOGIN | Odoo Login to use | "admin" |
+| OL_PASSWORD | Odoo password to use | "admin" |
+| OL_PROTOCOL | RPC protocol to use. Typically should not be changed. | "jsonrpc" |
+| OL_USER_ID | The default user ID to use.  | -1 |
