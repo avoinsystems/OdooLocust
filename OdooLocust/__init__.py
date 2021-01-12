@@ -6,6 +6,7 @@
 # Copyright (C) 2011 Nicolas Vanhoren
 # Copyright (C) 2011 OpenERP s.a. (<http://openerp.com>).
 # Copyright (C) 2017 Nicolas Seinlet
+# Copyright (C) 2021 Avoin.Systems
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without

@@ -5,6 +5,7 @@
 # Copyright (C) 2011 Nicolas Vanhoren
 # Copyright (C) 2011 OpenERP s.a. (<http://openerp.com>).
 # Copyright (C) 2017 Nicolas Seinlet
+# Copyright (C) 2021 Avoin.Systems
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -61,12 +62,14 @@ odoolib.JsonRPCSConnector.send = send
 class OdooUser(User):
 
     host = os.environ.get("OL_HOST", "127.0.0.1")
-    port = os.environ.get("OL_PORT", 8069)
+    port = int(os.environ.get("OL_PORT", 8069))
     database = os.environ.get("OL_DB_NAME", "demo")
     login = os.environ.get("OL_LOGIN", "admin")
     password = os.environ.get("OL_PASSWORD", "admin")
     protocol = os.environ.get("OL_PROTOCOL", "jsonrpc")
     user_id = os.environ.get("OL_USER_ID", -1)
+
+    abstract = True
 
     def __init__(self, *args, **kwargs):
         super(OdooUser, self).__init__(*args, **kwargs)

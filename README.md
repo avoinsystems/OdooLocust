@@ -84,7 +84,7 @@ The following is a list of environment variables that, when set, will be used to
 |-|-|-|
 | OL_HOST | The host IP of Odoo | "127.0.0.1" |
 | OL_PORT | The port on which to expose Locust | 8069 |
-| OL_DATABASE | Name of the Odoo database | "demo" |
+| OL_DB_NAME | Name of the Odoo database | "demo" |
 | OL_LOGIN | Odoo Login to use | "admin" |
 | OL_PASSWORD | Odoo password to use | "admin" |
 | OL_PROTOCOL | RPC protocol to use. Typically should not be changed. | "jsonrpc" |

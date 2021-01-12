@@ -2,6 +2,7 @@
 ##############################################################################
 #
 # Copyright (C) 2019 Nicolas Seinlet
+# Copyright (C) 2021 Avoin.Systems
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without

@@ -5,6 +5,7 @@
 # Copyright (C) 2011 Nicolas Vanhoren
 # Copyright (C) 2011 OpenERP s.a. (<http://openerp.com>).
 # Copyright (C) 2017 Nicolas Seinlet
+# Copyright (C) 2021 Avoin.Systems
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -32,9 +33,9 @@
 from distutils.core import setup
 
 setup(name='OdooLocust',
-      version='1.2.1',
+      version='1.3.0',
       description='Easily load test Odoo using Locust and odoolib.',
-      author='Nicolas Seinlet',
+      author='Avoin.Systems',
       author_email='',
       url='',
       packages=["OdooLocust"],
@@ -42,7 +43,7 @@ setup(name='OdooLocust',
           'odoo-client-lib',
           'locust',
       ],
-      long_description="See the home page for any information: https://github.com/odoo/OdooLocust.",
+      long_description="See the home page for any information: https://github.com/avoinsystems/OdooLocust.",
       keywords="odoo locust odoolib loadtest",
       license="BSD",
       classifiers=[
