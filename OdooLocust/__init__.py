@@ -31,5 +31,5 @@
 # 
 ##############################################################################
 
-from . import OdooLocust
-from . import OdooTaskSet
+from . import OdooUser
+from . import OdooGenericUser
