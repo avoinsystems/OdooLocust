@@ -18,10 +18,10 @@ To load test Odoo, you can create multiple tasks by extending the OdooUser class
 
 ```
 from locust import task, between
-from OdooUser import OdooUser
+from OdooLocust.OdooGenericUser import OdooGenericUser
 
 
-class MyOdooUser(OdooUser):
+class MyOdooUser(OdooGenericUser):
     wait_time = between(15, 50)
 
     def on_start(self):

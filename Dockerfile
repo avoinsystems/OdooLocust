@@ -5,5 +5,5 @@ LABEL maintainer="Varis Vecpuisis"
 RUN pip3 install --upgrade pip
 COPY ./requirements.txt /opt
 RUN cd /opt && pip3 install -r requirements.txt
-COPY ./OdooLocust /OdooLocust
+COPY OdooLocust /OdooLocust
 RUN pip3 install -e /OdooLocust

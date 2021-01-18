@@ -29,7 +29,7 @@
 import random
 
 from locust import task, between
-from OdooUser import OdooUser
+from .OdooUser import OdooUser
 
 
 class OdooGenericUser(OdooUser):
